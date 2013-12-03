@@ -125,7 +125,8 @@
 - (void)refreshForced:(BOOL)forced
 {
     for (MPPaletteViewController *paletteController in [self.paletteControllersByIdentifier allValues])
-        [paletteController refreshForced:forced];
+        if ([paletteController shouldDisplayPalette])
+            [paletteController refreshForced:forced];
     
     NSString *identifier = [[self.tabView selectedTabViewItem] identifier];
     [self.paletteContainers[identifier] reloadData];
