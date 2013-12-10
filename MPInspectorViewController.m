@@ -129,7 +129,10 @@
             [paletteController refreshForced:forced];
     
     NSString *identifier = [[self.tabView selectedTabViewItem] identifier];
-    [self.paletteContainers[identifier] reloadData];
+    
+    NSOutlineView *paletteContainer = self.paletteContainers[identifier];
+    [paletteContainer reloadData];
+    [paletteContainer expandItem:nil expandChildren:YES];
 }
 
 - (NSArray *)displayedItems
@@ -371,6 +374,7 @@
     // reload the outlineview to enforce it to display correct row heights etc
     NSOutlineView *outlineView = self.paletteContainers[newTabControllers[@"identifier"]];
     [outlineView reloadData];
+    [outlineView expandItem:nil expandChildren:YES];
     
     // go ahead and switch tabs
     [self.tabView selectTabViewItemAtIndex:selectedTabIndex];
@@ -471,7 +475,18 @@
 {    
     if (!item)
     {
-        return [self.paletteControllers[outlineView.identifier] count];
+        NSInteger count = 0;
+
+        for (MPPaletteViewController *palette in self.paletteControllers[outlineView.identifier])
+        {
+            if (palette.shouldDisplayPalette)
+                count++;
+        }
+        
+        return count;
+        
+        // The original implementation
+        //return [self.paletteControllers[outlineView.identifier] count];
     }
     
     if ([self outlineView:outlineView isGroupItem:item])
@@ -487,11 +502,25 @@
 {
     if (!item)
     {
-        MPPaletteViewController *paletteController = self.paletteControllers[outlineView.identifier][index];
-        return paletteController.identifier;
+        NSInteger outlineRow = -1, i = -1;
+        
+        for (MPPaletteViewController *palette in self.paletteControllers[outlineView.identifier])
+        {
+            i++;
+            if (palette.shouldDisplayPalette)
+                outlineRow++;
+            
+            if (outlineRow == index)
+                break;
+        }
+        
+        if (outlineRow == index)
+        {
+            MPPaletteViewController *paletteController = self.paletteControllers[outlineView.identifier][i];
+            return paletteController.identifier;
+        }
     }
-    
-    if ([self outlineView:outlineView isGroupItem:item])
+    else if ([self outlineView:outlineView isGroupItem:item])
     {
         NSString *paletteIdentifier = (NSString *)item;
         return [self paletteViewControllerForIdentifier:paletteIdentifier];
