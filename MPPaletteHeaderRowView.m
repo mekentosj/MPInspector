@@ -147,7 +147,7 @@
     self.disclosureButton.hidden = YES;
 
     // draw our favorite background color
-    [[NSColor viewForegroundColor] set];
+    [[NSColor whiteColor] set];
     NSRectFill(dirtyRect);
     
     // draw a 1px border if we're closed, also set a height check to prevent weird lines

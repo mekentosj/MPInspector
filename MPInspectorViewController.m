@@ -250,7 +250,7 @@
     paletteContainer.identifier = tabViewItem.identifier;
     paletteContainer.indentationMarkerFollowsCell = NO;
     paletteContainer.indentationPerLevel = 0;
-    paletteContainer.backgroundColor = [NSColor viewForegroundColor];
+    paletteContainer.backgroundColor = [NSColor whiteColor];
     paletteContainer.gridStyleMask = NSTableViewGridNone;
     paletteContainer.floatsGroupRows = NO;
     paletteContainer.focusRingType = NSFocusRingTypeNone;
@@ -268,7 +268,7 @@
     NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:CGRectZero];
     scrollView.documentView = paletteContainer;
     scrollView.drawsBackground = YES;
-    scrollView.backgroundColor = [NSColor viewBackgroundColor];
+    scrollView.backgroundColor = [NSColor whiteColor];
     scrollView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     scrollView.autoresizesSubviews = YES;
     scrollView.translatesAutoresizingMaskIntoConstraints = YES;
