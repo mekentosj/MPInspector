@@ -570,7 +570,8 @@
         NSString *paletteIdentifier = (NSString *)item;
         MPPaletteViewController *paletteController = [self paletteViewControllerForIdentifier:paletteIdentifier];
         headerView.textField.stringValue = [paletteController headerTitle];
-
+        headerView.textField.textColor = [NSColor blueHighlightColor];
+        
         // FUTURE:give a chance to the palette controller to change the content of the headerview
         // if ([paletteController respondsToSelector:(inspectorViewController:willDisplayHeaderView:)])
         //  [paletteController inspectorViewController:self willDisplayHeaderView: headerView];
