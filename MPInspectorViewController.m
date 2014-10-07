@@ -181,7 +181,12 @@
         NSString *title = tabConfiguration[@"title"];
         NSString *tooltip = tabConfiguration[@"toolTip"];
                 
-        NSImage *itemIcon = [NSImage imageNamed:iconName];        
+        NSImage *itemIcon = [NSImage imageNamed:iconName];
+        
+        // if we don't have an alternate icon name we are working with template images
+        if (!alternateIconName)
+            [itemIcon setTemplate:YES];
+        
         DMTabBarItem *item = [DMTabBarItem tabBarItemWithIcon:itemIcon tag:0];
         item.toolTip = (tooltip ? tooltip : title);
         
@@ -191,6 +196,7 @@
         
         if (alternateIconName)
             item.alternateIcon = [NSImage imageNamed:alternateIconName];
+        
 
         [items addObject:item];
     }
