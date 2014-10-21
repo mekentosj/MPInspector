@@ -31,7 +31,7 @@
         textField.frame = NSMakeRect(NSWidth(self.bounds) - 65.0, 8.0, 50.0, 18.0);
         textField.autoresizingMask = (NSViewMinXMargin | NSViewMinYMargin);
         textField.alignment = NSRightTextAlignment;
-        textField.textColor = [NSColor blueHighlightColor];
+        textField.textColor = [NSColor accentedHighlightColor];
         textField.font = [NSFont systemFontOfSize:11.0];
         textField.drawsBackground = NO;
         textField.editable = NO;
