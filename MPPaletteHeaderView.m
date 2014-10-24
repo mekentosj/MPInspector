@@ -38,7 +38,6 @@
 
 - (void)updateState
 {
-	self.textField.textColor = [NSColor colorWithCalibratedWhite:(_pressed ? 0.35 : 0.55) alpha:1.0];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent

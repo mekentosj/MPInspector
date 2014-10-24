@@ -31,7 +31,7 @@
         textField.frame = NSMakeRect(NSWidth(self.bounds) - 65.0, 8.0, 50.0, 18.0);
         textField.autoresizingMask = (NSViewMinXMargin | NSViewMinYMargin);
         textField.alignment = NSRightTextAlignment;
-        textField.textColor = [NSColor colorWithCalibratedWhite:0.55 alpha:1.0];
+        textField.textColor = [NSColor accentedHighlightColor];
         textField.font = [NSFont systemFontOfSize:11.0];
         textField.drawsBackground = NO;
         textField.editable = NO;
@@ -147,7 +147,7 @@
     self.disclosureButton.hidden = YES;
 
     // draw our favorite background color
-    [[NSColor viewForegroundColor] set];
+    [[NSColor whiteColor] set];
     NSRectFill(dirtyRect);
     
     // draw a 1px border if we're closed, also set a height check to prevent weird lines

@@ -181,7 +181,12 @@
         NSString *title = tabConfiguration[@"title"];
         NSString *tooltip = tabConfiguration[@"toolTip"];
                 
-        NSImage *itemIcon = [NSImage imageNamed:iconName];        
+        NSImage *itemIcon = [NSImage imageNamed:iconName];
+        
+        // if we don't have an alternate icon name we are working with template images
+        if (!alternateIconName)
+            [itemIcon setTemplate:YES];
+        
         DMTabBarItem *item = [DMTabBarItem tabBarItemWithIcon:itemIcon tag:0];
         item.toolTip = (tooltip ? tooltip : title);
         
@@ -191,6 +196,7 @@
         
         if (alternateIconName)
             item.alternateIcon = [NSImage imageNamed:alternateIconName];
+        
 
         [items addObject:item];
     }
@@ -250,7 +256,7 @@
     paletteContainer.identifier = tabViewItem.identifier;
     paletteContainer.indentationMarkerFollowsCell = NO;
     paletteContainer.indentationPerLevel = 0;
-    paletteContainer.backgroundColor = [NSColor viewForegroundColor];
+    paletteContainer.backgroundColor = [NSColor whiteColor];
     paletteContainer.gridStyleMask = NSTableViewGridNone;
     paletteContainer.floatsGroupRows = NO;
     paletteContainer.focusRingType = NSFocusRingTypeNone;
@@ -268,7 +274,7 @@
     NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:CGRectZero];
     scrollView.documentView = paletteContainer;
     scrollView.drawsBackground = YES;
-    scrollView.backgroundColor = [NSColor viewBackgroundColor];
+    scrollView.backgroundColor = [NSColor whiteColor];
     scrollView.autoresizingMask = (NSViewWidthSizable | NSViewHeightSizable);
     scrollView.autoresizesSubviews = YES;
     scrollView.translatesAutoresizingMaskIntoConstraints = YES;
@@ -570,7 +576,8 @@
         NSString *paletteIdentifier = (NSString *)item;
         MPPaletteViewController *paletteController = [self paletteViewControllerForIdentifier:paletteIdentifier];
         headerView.textField.stringValue = [paletteController headerTitle];
-
+        headerView.textField.textColor = [NSColor accentedHighlightColor];
+        
         // FUTURE:give a chance to the palette controller to change the content of the headerview
         // if ([paletteController respondsToSelector:(inspectorViewController:willDisplayHeaderView:)])
         //  [paletteController inspectorViewController:self willDisplayHeaderView: headerView];
