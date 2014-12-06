@@ -654,8 +654,15 @@
     for (NSOutlineView *container in [self.paletteContainers allValues])
     {
         NSInteger rowIndex = [container rowForView:paletteViewController.view];
-        if (rowIndex < 0) continue;
-        
+        if (rowIndex < 0)
+        {
+            rowIndex = [container rowForItem:paletteViewController];
+        }
+        if (rowIndex < 0)
+        {
+            continue;
+        }
+
         NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:rowIndex];
         if (!animate)
         {
