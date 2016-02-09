@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, MPPaletteViewMode)
 }
 
 @property (assign) id <MPPaletteViewControllerDelegate> delegate;
+@property (copy) NSString *identifier;
 
 @property (readonly) NSArray *displayedItems;
 

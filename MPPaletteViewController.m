@@ -8,10 +8,15 @@
 #import "MPInspectorViewController.h"
 
 #import "MTRefreshable.h"
+
+#import <AppKit/NSUserInterfaceItemIdentification.h>
     
-@interface MPPaletteViewController ()
+@interface MPPaletteViewController () {
+    NSString *_paletteIdentifer; // For pre-10.10 compatibility with NSUserInterfaceItemIdentification
+}
 @property (getter=isVisible, assign) BOOL visible;
 @property (readonly) NSString *defaultNibName;
+
 @end
 
 
@@ -19,6 +24,8 @@
 
 @synthesize delegate = _delegate;
 @synthesize height = _height;
+
+@dynamic identifier;
 
 - (instancetype)initWithDelegate:(id <MPPaletteViewControllerDelegate>)aDelegate identifier:(NSString *)identifier
 {
@@ -53,6 +60,21 @@
 	return (r.location != NSNotFound ? [className substringToIndex:r.location] : className);
 }
 
+- (NSString *)identifier {
+    if ([self conformsToProtocol:@protocol(NSUserInterfaceItemIdentification)]) {
+        return [super identifier];
+    } else {
+        return _paletteIdentifer;
+    }
+}
+
+- (void)setIdentifier:(NSString *)identifier {
+    if ([self conformsToProtocol:@protocol(NSUserInterfaceItemIdentification)]) {
+        [super setIdentifier:identifier];
+    } else {
+        _paletteIdentifer = [identifier copy];
+    }
+}
 
 #pragma mark -
 #pragma mark Refresh
