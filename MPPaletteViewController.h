@@ -18,11 +18,8 @@ typedef NS_ENUM(NSInteger, MPPaletteViewMode)
 @class MPInspectorViewController, JKConfiguration;
 
 @interface MPPaletteViewController : PARViewController
-{    
-    __unsafe_unretained id <MPPaletteViewControllerDelegate> delegate;
-}
 
-@property (assign) id <MPPaletteViewControllerDelegate> delegate;
+@property (weak) id <MPPaletteViewControllerDelegate> delegate;
 @property (copy) NSString *identifier;
 
 @property (readonly) NSArray *displayedItems;
